@@ -1,0 +1,37 @@
+
+/*Index*/
+.contenedor{
+    margin-left: 40px;    
+}
+
+.nuevos.productos{
+    margin-left: 50px
+}
+
+.promociones{
+    margin-left: 25px
+}
+
+.parallax-container{
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+/*Login*/
+.form-login{
+    margin-top: 50px
+}
+
+body{
+    background-color: white
+}
+
+.form-login .card{
+
+    background:#A9F5F2
+}
+
+.form-login label{
+    font-size: 18px
+}
+

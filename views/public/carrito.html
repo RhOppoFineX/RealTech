@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="../../css/materialize.css">
+    <link rel="stylesheet" href="../../css/icons.css">
+</head>
+<body>
+
+
+     <!--Siempre fijo arriba-->
+
+  <div class="navbar-fixed">
+        <nav class="indigo accent-3">
+          <div class="nav-wrapper container">
+    
+            <!--Logo-->
+            <a href="#" class="brand-logo left"> RealTech
+              <i class="large material-icons left">usb</i>
+            </a>
+    
+            <!--menú-->
+            <ul class="right">
+              <!--Registrarse-->
+              <li><a href="../../resources/pages/public/formularios.html"> Registrarse
+                  <i class="large material-icons left">assignment</i>
+                  <!--Icono-->
+                </a></li>
+    
+              <!--Login-->
+              <li><a href="../../resources/pages/public/login.html">Login
+                  <i class="large material-icons left">account_circle</i>
+                </a></li>
+    
+    
+              <li>
+                <a href="#" class="dropdown-trigger" data-target="Id_drop"> Productos
+                  <i class="material-icons right">arrow_drop_down</i>
+                  <i class="material-icons left">add_shopping_cart</i>
+                </a>
+              </li>
+            </ul>
+            <!--menú-->
+    
+          </div>
+        </nav>
+      </div>
+
+      <br>
+      <br>
+    
+    
+      <!--Desplegable-->
+      <ul id="Id_drop" class="dropdown-content">
+        <li><a href="../../resources/pages/public/gadgets.html">Gadgets</a></li>
+        <li class="divider"></li>
+        <li><a href="../../resources/pages/public/componentes.html">Componentes</a></li>
+        <li class="divider"></li>
+        <li><a href="../../resources/pages/public/ShoopingCart/index.html">Carrito</a></li>
+      </ul>
+
+      <!--Estructura del carrito-->
+      <div class="container section">
+            <div class="row">
+                <!-- Imagen del producto a comprar-->
+                <div class="col s6">
+                <img class="materialboxed" width="400" src="../../img/PERIFERICOS/PERIFERICOS-PC/mouse-inalambrico.PNG">
+                </div>
+                <div class="col s6">
+                        <!-- Nombre del producto a comprar-->
+                        <h3>Maouse Inalambrico Razer con nano Censor</h3>
+                            <!-- Precio del producto a comprar-->
+                            <h4 class="green-text">$40</h4>
+                            <!-- Descripcion del envio-->
+                            <h6 class="grey-text">Envio gratis</h6>
+                            <br>
+                        <div class="input-field col s12 m6">
+                            <select>
+                            <!-- Cantidad de productos-->
+                            <option value="" disabled selected>Escoja la cantidad </option>
+                            <option value="1">1</option>
+                            <option value="2">2 </option>
+                            <option value="3">3</option>
+                            </select>
+                            <label>Materialize Select</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <select class="icons">
+                            <!-- Color de producto-->
+                            <option value="" disabled selected>Escoja un color</option>
+                            <option value="" data-icon="../../resources/img/surf.jpg">rojo</option>
+                            <option value="" data-icon="../../resources/img/surf2.jpg">negro</option>
+                            <option value="" data-icon="../../resources/img/surf5.jpg">azul</option>
+                            </select>
+                            <label>Images in select</label>
+                        </div>
+                        <!-- Confirmacion de la compra-->
+                        <div class="center">
+                            <a class="waves-effect blue darken-4  btn-small"><i class="material-icons left">shopping_cart</i>Agregar al carrito</a>
+                        </div>
+        
+                </div>
+           </div>
+         </div>        
+
+
+
+    <script src="../../js/jquery-3.3.1.min.js"></script>
+    <script src="../../js/materialize.js"></script>
+    <script src="../../js/slider.js"></script><!--Incluye Material Boxed-->
+    <script src="../../js/combobox.js"></script>
+</body>
+</html>
