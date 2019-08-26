@@ -25,7 +25,10 @@ Create Table usuarios(
     apellidos_usuario varchar(40) NOT NULL,
     correo_usuario varchar(50) UNIQUE NOT NULL,   
     alias_usuario VARCHAR(25) UNIQUE NOT NULL,
-    clave_usuario VARCHAR(250) NOT NULL
+    clave_usuario VARCHAR(250) NOT NULL,
+    Intentos TINYINT NOT NULL DEFAULT 0,
+    Estado TINYINT(1) NOT NULL DEFAULT 1,
+    Id_tipo_usuario Integer Unsigned NULL DEFAULT 1
 );
 
 create table Departamento(

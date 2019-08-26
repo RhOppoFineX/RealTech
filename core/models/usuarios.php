@@ -8,8 +8,40 @@ class Usuarios extends Validator
 	private $correo = null;
 	private $alias = null;
 	private $clave = null;
+	private $Intentos = null;
+	private $Estado = null;
 
 	// Métodos para sobrecarga de propiedades
+
+	public function setIntentos($value)
+	{
+		if($this->validateInteger($value)) {
+			$this->Intentos = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getIntentos()
+	{
+		return $this->Intentos;
+	}
+	
+	public function setEstado($value)
+	{
+		if($this->validateInteger($value)) {
+			$this->Estado = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getEstado()
+	{
+		return $this->Estado;
+	}
 	public function setId($value)
 	{
 		if ($this->validateId($value)) {
@@ -103,7 +135,7 @@ class Usuarios extends Validator
 	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?';
+		$sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?  and Estado = 1 and Intentos < 5';
 		$params = array($this->alias);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
@@ -116,12 +148,13 @@ class Usuarios extends Validator
 
 	public function checkPassword()
 	{
-		$sql = 'SELECT clave_usuario FROM usuarios WHERE id_usuario = ?';
+		$sql = 'SELECT clave_usuario FROM usuarios WHERE id_usuario = ?  and Estado = 1 and Intentos < 5';
 		$params = array($this->id);
 		$data = Database::getRow($sql, $params);
 		if (password_verify($this->clave, $data['clave_usuario'])) {
 			return true;
 		} else {
+			$this->verIntentos();
 			return false;
 		}
 	}
@@ -129,7 +162,7 @@ class Usuarios extends Validator
 	public function changePassword()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'UPDATE usuarios SET clave_usuario = ? WHERE id_usuario = ?';
+		$sql = 'UPDATE usuarios SET clave_usuario = ? WHERE id_usuario = ?  and Estado = 1 and Intentos < 5';
 		$params = array($hash, $this->id);
 		return Database::executeRow($sql, $params);
 	}
@@ -176,6 +209,34 @@ class Usuarios extends Validator
 		$sql = 'DELETE FROM usuarios WHERE id_usuario = ?';
 		$params = array($this->id);
 		return Database::executeRow($sql, $params);
+	}
+
+	public function verIntentos()
+	{
+		$sql = 'SELECT Intentos FROM usuarios WHERE alias_usuario = ?';
+		$params = array($this->alias);
+		$data = Database::getRow($sql, $params);
+		
+		if($data){
+			$inten = $data['Intentos'];
+			$inten = $inten + 1; 			
+			$this->Intentos = $inten;
+			$this->aumentarIntentos();
+		}
+	}
+
+	public function aumentarIntentos()
+	{
+		$sql = 'UPDATE usuarios SET Intentos = ? WHERE alias_usuario = ?';
+		$params = array($this->Intentos, $this->alias);
+		return Database::executeRow($sql, $params);
+	}	
+
+	public function disableUsuario()
+	{
+		$sql = 'UPDATE usuarios SET Estado = ? WHERE alias_usuario = ?';
+		$params = array(0, $this->alias);
+		return Database::executeRow($sql, $params);		
 	}
 }
 ?>

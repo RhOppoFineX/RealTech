@@ -19,6 +19,11 @@ function signOff()
     });
 }
 
+function signOffIncative()
+{
+    location.href = apiAccount + 'logout';
+}
+
 // Función para mostrar formulario de perfil de usuario
 function modalProfile()
 {

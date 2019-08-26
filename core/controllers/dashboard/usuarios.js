@@ -119,7 +119,7 @@ $('#form-create').submit(function()
                 sweetAlert(2, result.exception, null);
             }
         } else {
-            console.log(response);
+            sweetAlert(2, response, null);
         }
     })
     .fail(function(jqXHR){
@@ -188,7 +188,7 @@ $('#form-update').submit(function()
                 sweetAlert(2, result.exception, null);
             }
         } else {
-            console.log(response);
+            sweetAlert(2, response, null);            
         }
     })
     .fail(function(jqXHR){

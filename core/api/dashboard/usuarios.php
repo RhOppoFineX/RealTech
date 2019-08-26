@@ -71,11 +71,15 @@ if (isset($_GET['action'])) {
                             if ($usuario->checkPassword()) {
                                 if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
                                     if ($usuario->setClave($_POST['clave_nueva_1'])) {
-                                        if ($usuario->changePassword()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Contraseña cambiada correctamente';
+                                        if($_POST['clave_nueva_1'] != $_POST['clave_actual_1']){
+                                            if ($usuario->changePassword()) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Contraseña cambiada correctamente';
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = 'La nueva contraseña debe ser diferente a la anterior';
                                         }
                                     } else {
                                         $result['exception'] = 'Clave nueva menor a 6 caracteres';
@@ -136,7 +140,7 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Operación fallida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 8 caracteres';
                                     }
                                 } else {
                                     $result['exception'] = 'Claves diferentes';
@@ -246,7 +250,7 @@ if (isset($_GET['action'])) {
                                             $result['exception'] = 'Operación fallida';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Clave menor a 8 caracteres';
                                     }
                                 } else {
                                     $result['exception'] = 'Claves diferentes';
@@ -270,15 +274,27 @@ if (isset($_GET['action'])) {
                     if ($usuario->checkAlias()) {
                         if ($usuario->setClave($_POST['clave'])) {
                             if ($usuario->checkPassword()) {
-                                $_SESSION['id_usuario'] = $usuario->getId();
-                                $_SESSION['alias_usuario'] = $usuario->getAlias();
-                                $result['status'] = 1;
-                                $result['message'] = 'Autenticación correcta';
+                                if($usuario->setIntentos(0)){
+                                    if($usuario->aumentarIntentos()){
+                                        $_SESSION['id_usuario'] = $usuario->getId();
+                                        $_SESSION['alias_usuario'] = $usuario->getAlias();
+                                        //$_SESSION['Id_tipo_usuario'] = $usuario->getId_tipo_usuario();
+                                        $result['status'] = true;
+                                        $result['message'] = 'Autenticación correcta';                                        
+                                    } else {
+                                        $result['exception'] = 'Ha fallado';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Ha fallado';
+                                }
                             } else {
-                                $result['exception'] = 'Clave inexistente';
+                                if($usuario->getIntentos() < 5)
+                                    $result['exception'] = 'Clave inexistente, ha realizado ' .$usuario->getIntentos() . ' Intentos';
+                                 else   
+                                    $result['exception'] = 'Cuenta Bloqueada';
                             }
                         } else {
-                            $result['exception'] = 'Clave menor a 6 caracteres';
+                            $result['exception'] = 'Clave menor a 8 caracteres';
                         }
                     } else {
                         $result['exception'] = 'Alias inexistente';
