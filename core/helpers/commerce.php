@@ -1,6 +1,6 @@
 <?php
-/*
-    Clase para definir las plantillas en las páginas web del sitio público.
+/**
+*	Clase para definir las plantillas de las páginas web del sitio público.
 */
 class Commerce
 {
@@ -12,8 +12,8 @@ class Commerce
 			<html lang="es">
 			<head>
 				<meta charset="utf-8">
-				<title>RealTech - '.$title.'</title>
-				
+				<title>Coffeeshop - '.$title.'</title>
+				<link type="image/png" rel="icon" href="../../resources/img/logo.png"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/icons.css"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/commerce.css"/>
@@ -23,8 +23,9 @@ class Commerce
 				<header>
 					<div class="navbar-fixed">
 						<nav class="green">
-							<div class="nav-wrapper indigo accent-3">
-								
+							<div class="nav-wrapper">
+								<a href="index.php" class="brand-logo"><img src="../../resources/img/logo.png" height="60"></a>
+								<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 								<ul class="right hide-on-med-and-down">
 									<li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
 									<li><a href="#"><i class="material-icons left">shopping_cart</i>Compras</a></li>
@@ -48,7 +49,7 @@ class Commerce
 	{
 		print('
 				</main>
-				<footer class="page-footer indigo accent-3">
+				<footer class="page-footer green">
 					<div class="container">
 						<div class="row">
 							<div class="col s12 m6 l6">
@@ -69,7 +70,7 @@ class Commerce
 					</div>
 					<div class="footer-copyright">
 						<div class="container">
-							<span>© RealTech, todos los derechos reservados.</span>
+							<span>© Coffeeshop, todos los derechos reservados.</span>
 							<span class="grey-text text-lighten-4 right">Diseñado con <a class="red-text text-accent-1" href="http://materializecss.com/" target="_blank"><b>Materialize</b></a></span>
 						</div>
 					</div>
@@ -78,8 +79,9 @@ class Commerce
 				<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 				<script type="text/javascript" src="../../resources/js/commerce.js"></script>
-				<script type="text/javascript" src="../../core/helpers/functions.js"></script>
-				<script type="text/javascript" src="../../core/controllers/public/'.$controller.'"></script>
+				<script type="text/javascript" src="../../core/helpers/validator.js"></script>
+				<script type="text/javascript" src="../../core/helpers/components.js"></script>
+				<script type="text/javascript" src="../../core/controllers/commerce/'.$controller.'"></script>
 			</body>
 			</html>
 		');

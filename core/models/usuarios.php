@@ -1,7 +1,7 @@
 <?php
 class Usuarios extends Validator
 {
-	//Declaración de propiedades
+	// Declaración de propiedades
 	private $id = null;
 	private $nombres = null;
 	private $apellidos = null;
@@ -9,7 +9,7 @@ class Usuarios extends Validator
 	private $alias = null;
 	private $clave = null;
 
-	//Métodos para sobrecarga de propiedades
+	// Métodos para sobrecarga de propiedades
 	public function setId($value)
 	{
 		if ($this->validateId($value)) {
@@ -100,7 +100,7 @@ class Usuarios extends Validator
 		return $this->clave;
 	}
 
-	//Métodos para manejar la sesión del usuario
+	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
 		$sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?';
@@ -134,7 +134,7 @@ class Usuarios extends Validator
 		return Database::executeRow($sql, $params);
 	}
 
-	//Metodos para manejar el CRUD
+	// Metodos para manejar el SCRUD
 	public function readUsuarios()
 	{
 		$sql = 'SELECT id_usuario, nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario FROM usuarios ORDER BY apellidos_usuario';

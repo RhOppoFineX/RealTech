@@ -1,7 +1,7 @@
 <?php
 class Productos extends Validator
 {
-	//Declaración de propiedades
+	// Declaración de propiedades
 	private $id = null;
 	private $nombre = null;
 	private $descripcion = null;
@@ -9,9 +9,9 @@ class Productos extends Validator
 	private $imagen = null;
 	private $categoria = null;
 	private $estado = null;
-	private $ruta = '../../resources/img/productos/';
+	private $ruta = '../../../resources/img/productos/';
 
-	//Métodos para sobrecarga de propiedades
+	// Métodos para sobrecarga de propiedades
 	public function setId($value)
 	{
 		if ($this->validateId($value)) {
@@ -122,7 +122,7 @@ class Productos extends Validator
 		return $this->ruta;
 	}
 
-	//Metodos para el manejo del CRUD
+	//Metodos para el manejo del SCRUD
 	public function readProductosCategoria()
 	{
 		$sql = 'SELECT nombre_categoria, id_producto, imagen_producto, nombre_producto, descripcion_producto, precio_producto FROM productos INNER JOIN categorias USING(id_categoria) WHERE id_categoria = ? AND estado_producto = 1 ORDER BY nombre_producto';
@@ -141,13 +141,6 @@ class Productos extends Validator
 	{
 		$sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion_producto, precio_producto, nombre_categoria, estado_producto FROM productos INNER JOIN categorias USING(id_categoria) WHERE nombre_producto LIKE ? OR descripcion_producto LIKE ? ORDER BY nombre_producto';
 		$params = array("%$value%", "%$value%");
-		return Database::getRows($sql, $params);
-	}
-
-	public function readCategorias()
-	{
-		$sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria FROM categorias';
-		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 

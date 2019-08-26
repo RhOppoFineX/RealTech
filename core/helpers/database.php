@@ -1,22 +1,22 @@
 <?php
-/*
-    Clase para realizar las operaciones en la base de datos.
+/**
+*   Clase para realizar las operaciones en la base de datos.
 */
 class Database
 {
-/*
-    Atributos de la clase para almacenar los datos necesarios al realizar las acciones respectivas.
+/**
+*   Propiedades de la clase para manejar los datos necesarios al realizar las acciones respectivas.
 */
     private static $connection = null;
     private static $statement = null;
     private static $id = null;
 
-/*
-    Método para establecer la conexión con la base de datos utilizando las credenciales respectivas.
-    No recibe parámetros y no devuelve ningún valor, capturando las excepciones del servidor de bases de datos.
+/**
+*   Método para establecer la conexión a la base de datos con manejo de excepciones del servidor.
 */
     private function connect()
     {
+        // Credenciales para establecer la conexión con la base de datos.
         $server = 'localhost';
         $database = 'RealTech';
         $username = 'root';
@@ -28,9 +28,8 @@ class Database
         }
     }
 
-/*
-    Método para anular la conexión con la base de datos y capturar la información de las excepciones en las sentencias SQL.
-    No recibe parámetros y no devuelve ningún valor.
+/**
+*   Método para anular la conexión con la base de datos y capturar la información de las excepciones en las sentencias SQL.
 */
     private function desconnect()
     {
@@ -41,11 +40,14 @@ class Database
         }
     }
 
-/*
-    Método para ejecutar las siguientes sentencias SQL: insert, update y delete.
-    Recibe como parámetros la sentencia SQL de tipo string y los valores de los campos respectivos en un arreglo.
-    Se utiliza además, para obtener el valor de la llave primaria del último registro insertado.
-    Devuelve como resultado TRUE en caso de éxito y FALSE en caso contrario.
+/**
+*   Método para ejecutar las siguientes sentencias SQL: insert, update y delete.
+*   Se utiliza además para obtener el valor de la llave primaria del último registro insertado.
+*
+*   @return boolean true si la sentencia se ejecuta satisfactoriamente y false en caso contrario.
+*
+*   @param string $query sentencia SQL
+*   @param array $values conjunto de valores
 */
     public static function executeRow($query, $values)
     {
@@ -57,10 +59,13 @@ class Database
         return $state;
     }
 
-/*
-    Método para obtener el resultado del primer registro de una consulta tipo SELECT.
-    Recibe como parámetros la sentencia SQL de tipo string y los valores de los campos respectivos en un arreglo.
-    Devuelve como resultado un arreglo asociativo del registro en caso de éxito, NULL en caso contrario.
+/**
+*   Método para obtener el resultado del primer registro de una sentencia SQL tipo SELECT.
+*
+*   @return array asociativo del registro si la sentencia SQL se ejecuta satisfactoriamente o null en caso contrario.
+*
+*   @param string $query sentencia SQL
+*   @param array $values conjunto de valores
 */
     public static function getRow($query, $values)
     {
@@ -71,10 +76,13 @@ class Database
         return self::$statement->fetch(PDO::FETCH_ASSOC);
     }
 
-/*
-    Método para obtener todos los registros de una consulta tipo SELECT.
-    Recibe como parámetros la sentencia SQL de tipo string y los valores de los campos respectivos en un arreglo.
-    Devuelve como resultado un arreglo asociativo de los registros en caso de éxito, NULL en caso contrario.
+/**
+*   Método para obtener todos los registros de una sentencia SQL tipo SELECT.
+*
+*   @return array asociativo de los registros si la sentencia SQL se ejecuta satisfactoriamente o null en caso contrario.
+*
+*   @param string $query sentencia SQL
+*   @param array $values conjunto de valores
 */
     public static function getRows($query, $values)
     {
@@ -85,18 +93,23 @@ class Database
         return self::$statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-/*
-    Método para obtener el valor de la llave primaria del último registro insertado.
-    No recibe parámetros.
+/**
+*   Método para obtener el valor de la llave primaria del último registro insertado.
+*
+*   @return int si la sentencia SQL ha sido un insert o 0 en caso contrario.
 */
     public static function getLastRowId()
     {
         return self::$id;
     }
 
-/*
-    Método para obtener el mensaje de error al ocurrir una excepción.
-    No recibe parámetros.
+/**
+*   Método para obtener el mensaje de error al ocurrir una excepción en las sentencias SQL.
+*
+*   @return string con el error personalizado a mostrar.
+*
+*   @param int $code código especifico del error.
+*   @param string $message mensaje especifico del error.
 */
     private static function getException($code, $message)
     {

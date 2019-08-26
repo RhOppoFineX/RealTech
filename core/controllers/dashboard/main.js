@@ -3,7 +3,7 @@ $(document).ready(function()
     showGreeting();
 })
 
-//Función para mostrar un saludo dependiendo de la hora del cliente
+// Función para mostrar un saludo dependiendo de la hora del cliente
 function showGreeting()
 {
     let today = new Date();

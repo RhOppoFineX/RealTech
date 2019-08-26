@@ -29,13 +29,13 @@ Create Table usuarios(
 );
 
 create table Departamento(
-    Id_departamento int unsigned primary key not null Auto_Increment,
+    Id_departamento int unsigned UNIQUE primary key not null Auto_Increment,
     Nombre_departamento varchar(30) not null
 );
 
 create table Municipio(
     Id_municipio int unsigned primary key not null Auto_Increment,
-    Nombre_municipio varchar(30) not null,
+    Nombre_municipio varchar(30) UNIQUE not null,
     Id_departamento int unsigned not null,
     foreign key (id_departamento) references Departamento(id_departamento)
 );

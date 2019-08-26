@@ -1,14 +1,14 @@
 <?php
 class Categorias extends Validator
 {
-	//Declaración de propiedades
+	// Declaración de propiedades
 	private $id = null;
 	private $nombre = null;
 	private $imagen = null;
 	private $descripcion = null;
-	private $ruta = '../../resources/img/categorias/';
+	private $ruta = '../../../resources/img/categorias/';
 
-	//Métodos para sobrecarga de propiedades
+	// Métodos para sobrecarga de propiedades
 	public function setId($value)
 	{
 		if ($this->validateId($value)) {
@@ -79,7 +79,7 @@ class Categorias extends Validator
 		return $this->descripcion;
 	}
 
-	//Metodos para el manejo del CRUD
+	// Metodos para el manejo del SCRUD
 	public function readCategorias()
 	{
 		$sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria FROM categorias ORDER BY nombre_categoria';

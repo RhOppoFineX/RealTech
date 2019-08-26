@@ -4,23 +4,23 @@ $(document).ready(function()
     readCategorias();
 })
 
-//Constante para establecer la ruta y parámetros de comunicación con la API
-const apiCatalogo = '../../core/api/productos.php?site=commerce&action=';
+// Constante para establecer la ruta y parámetros de comunicación con la API
+const api = '../../core/api/commerce/catalogo.php?action=';
 
-//Función para obtener y mostrar las categorías de productos
+// Función para obtener y mostrar las categorías de productos
 function readCategorias()
 {
     $.ajax({
-        url: apiCatalogo + 'readCategorias',
+        url: api + 'readCategorias',
         type: 'post',
         data: null,
         datatype: 'json'
     })
     .done(function(response){
-        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
-            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 let content = '';
                 result.dataset.forEach(function(row){
@@ -47,23 +47,24 @@ function readCategorias()
                 $('.tooltipped').tooltip();
             } else {
                 $('#title').html('<i class="material-icons small">cloud_off</i><span class="red-text">' + result.exception + '</span>');
+                $('#catalogo').html('');
             }
         } else {
             console.log(response);
         }
     })
     .fail(function(jqXHR){
-        //Se muestran en consola los posibles errores de la solicitud AJAX
+        // Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
 
-//Función para obtener y mostrar los productos de acuerdo a la categoría seleccionada
+// Función para obtener y mostrar los productos de acuerdo a la categoría seleccionada
 function readProductosCategoria(id, categoria)
 {
     $('#slider').hide();
     $.ajax({
-        url: apiCatalogo + 'readProductos',
+        url: api + 'readProductos',
         type: 'post',
         data:{
             id_categoria: id
@@ -71,10 +72,10 @@ function readProductosCategoria(id, categoria)
         datatype: 'json'
     })
     .done(function(response){
-        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
-            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 let content = '';
                 result.dataset.forEach(function(row){
@@ -99,22 +100,23 @@ function readProductosCategoria(id, categoria)
                 $('.tooltipped').tooltip();
             } else {
                 $('#title').html('<i class="material-icons small">cloud_off</i><span class="red-text">' + result.exception + '</span>');
+                $('#catalogo').html('');
             }
         } else {
             console.log(response);
         }
     })
     .fail(function(jqXHR){
-        //Se muestran en consola los posibles errores de la solicitud AJAX
+        // Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }
 
-//Función para obtener y mostrar los datos del producto seleccionado
+// Función para obtener y mostrar los datos del producto seleccionado
 function getProducto(id)
 {
     $.ajax({
-        url: apiCatalogo + 'detailProducto',
+        url: api + 'detailProducto',
         type: 'post',
         data:{
             id_producto: id
@@ -122,10 +124,10 @@ function getProducto(id)
         datatype: 'json'
     })
     .done(function(response){
-        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
         if (isJSONString(response)) {
             const result = JSON.parse(response);
-            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            // Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 let content = `
                     <div class="card horizontal">
@@ -160,13 +162,14 @@ function getProducto(id)
                 $('.tooltipped').tooltip();
             } else {
                 $('#title').html('<i class="material-icons small">cloud_off</i><span class="red-text">' + result.exception + '</span>');
+                $('#catalogo').html('');
             }
         } else {
             console.log(response);
         }
     })
     .fail(function(jqXHR){
-        //Se muestran en consola los posibles errores de la solicitud AJAX
+        // Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
 }

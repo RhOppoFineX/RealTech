@@ -1,6 +1,6 @@
 <?php
-/*
-    Clase para definir las plantillas en las páginas web del sitio privado.
+/**
+*	Clase para definir las plantillas de las páginas web del sitio privado.
 */
 class Dashboard
 {
@@ -10,10 +10,11 @@ class Dashboard
 		ini_set('date.timezone', 'America/El_Salvador');
 		print('
 			<!DOCTYPE html>
-			<html lang="es">
+			<html lang="es"
 				<head>
 					<meta charset="utf-8">
-					<title>RealTech - '.$title.'</title>					
+					<title>Dashboard - '.$title.'</title>
+					<link type="image/png" rel="icon" href="../../resources/img/logo.png"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/icons.css"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/dashboard.css"/>
@@ -21,8 +22,8 @@ class Dashboard
 				</head>
 				<body>
 		');
-		//Se comprueba si existe una sesión para mostrar el menú de opciones, de lo contrario se muestra un menú vacío
-		if (isset($_SESSION['idUsuario'])) {
+		// Se comprueba si existe una sesión para mostrar el menú de opciones, de lo contrario se muestra un menú vacío
+		if (isset($_SESSION['id_usuario'])) {
 			$filename = basename($_SERVER['PHP_SELF']);
 			if ($filename != 'index.php' && $filename != 'register.php') {
 				self::modals();
@@ -30,12 +31,14 @@ class Dashboard
 					<header>
 						<div class="navbar-fixed">
 							<nav class="indigo accent-3">
-								<div class="nav-wrapper">									
+								<div class="nav-wrapper">
+									<a href="main.php" class="brand-logo"><img src="../../resources/img/logo.png" height="60"></a>
+									<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 									<ul class="right hide-on-med-and-down">
 										<li><a href="productos.php"><i class="material-icons left">shop</i>Productos</a></li>
 										<li><a href="categorias.php"><i class="material-icons left">shop_two</i>Categorías</a></li>
 										<li><a href="usuarios.php"><i class="material-icons left">group</i>Usuarios</a></li>
-										<li><a href="#" class="dropdown-trigger" data-target="dropdown"><i class="material-icons left">verified_user</i>Cuenta: <b>'.$_SESSION['aliasUsuario'].'</b></a></li>
+										<li><a href="#" class="dropdown-trigger" data-target="dropdown"><i class="material-icons left">verified_user</i>Cuenta: <b>'.$_SESSION['alias_usuario'].'</b></a></li>
 									</ul>
 									<ul id="dropdown" class="dropdown-content">
 										<li><a href="#" onclick="modalProfile()"><i class="material-icons">face</i>Editar perfil</a></li>
@@ -49,7 +52,7 @@ class Dashboard
 							<li><a href="productos.php"><i class="material-icons">shop</i>Productos</a></li>
 							<li><a href="categorias.php"><i class="material-icons">shop_two</i>Categorías</a></li>
 							<li><a href="usuarios.php"><i class="material-icons">group</i>Usuarios</a></li>
-							<li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>'.$_SESSION['aliasUsuario'].'</b></a></li>
+							<li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>'.$_SESSION['alias_usuario'].'</b></a></li>
 						</ul>
 						<ul id="dropdown-mobile" class="dropdown-content">
 							<li><a href="#" onclick="modalProfile()">Editar perfil</a></li>
@@ -93,16 +96,19 @@ class Dashboard
 						<div class="container">
 							<div class="row">
 								<div class="col s12 m6 l6">
-									<h5 class="white-text">Dashboard</h5>									
+									<h5 class="white-text">Dashboard</h5>
+									<a class="white-text" href="mailto:dacasoft@outlook.com"><i class="material-icons left">email</i>Ayuda</a>
 								</div>
 								<div class="col s12 m6 l6">
-									<h5 class="white-text">Enlaces</h5>									
+									<h5 class="white-text">Enlaces</h5>
+									<a class="white-text" href="http://localhost/phpmyadmin/" target="_blank"><i class="material-icons left">cloud</i>phpMyAdmin</a>
 								</div>
 							</div>
 						</div>
 						<div class="footer-copyright">
 							<div class="container">
-								<span>© RealTech, todos los derechos reservados.</span>								
+								<span>© RealTech, todos los derechos reservados.</span>
+								<span class="white-text right">Diseñado con <a class="red-text text-accent-1" href="http://materializecss.com/" target="_blank"><b>Materialize</b></a></span>
 							</div>
 						</div>
 					</footer>
@@ -110,7 +116,8 @@ class Dashboard
 					<script type="text/javascript" src="../../resources/js/materialize.min.js"></script>
 					<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 					<script type="text/javascript" src="../../resources/js/dashboard.js"></script>
-					<script type="text/javascript" src="../../core/helpers/functions.js"></script>
+					<script type="text/javascript" src="../../core/helpers/validator.js"></script>
+					<script type="text/javascript" src="../../core/helpers/components.js"></script>
 					<script type="text/javascript" src="../../core/controllers/dashboard/account.js"></script>
 					<script type="text/javascript" src="../../core/controllers/dashboard/'.$controller.'"></script>
 				</body>

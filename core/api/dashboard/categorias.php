@@ -1,15 +1,15 @@
 <?php
-require_once('../../core/helpers/database.php');
-require_once('../../core/helpers/validator.php');
-require_once('../../core/models/categorias.php');
+require_once('../../helpers/database.php');
+require_once('../../helpers/validator.php');
+require_once('../../models/categorias.php');
 
-//Se comprueba si existe una petición del sitio web y la acción a realizar, de lo contrario se muestra una página de error
-if (isset($_GET['site']) && isset($_GET['action'])) {
+// Se comprueba si existe una acción a realizar, de lo contrario se muestra un mensaje de error
+if (isset($_GET['action'])) {
 	session_start();
 	$categoria = new Categorias;
-	$result = array('status' => 0, 'exception' => '');
-	//Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
-	if (isset($_SESSION['idUsuario']) && $_GET['site'] == 'dashboard') {
+	$result = array('status' => 0, 'message' => null, 'exception' => null);
+	// Se verifica si existe una sesión iniciada como administrador para realizar las operaciones correspondientes
+	if (isset($_SESSION['id_usuario'])) {
 		switch ($_GET['action']) {
 			case 'read':
 				if ($result['dataset'] = $categoria->readCategorias()) {
@@ -20,9 +20,15 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 				break;
 			case 'search':
 				$_POST = $categoria->validateForm($_POST);
-				if ($_POST['busqueda'] != '') {
-					if ($result['dataset'] = $categoria->searchCategorias($_POST['busqueda'])) {
+				if ($_POST['search'] != '') {
+					if ($result['dataset'] = $categoria->searchCategorias($_POST['search'])) {
 						$result['status'] = 1;
+						$rows = count($result['dataset']);
+						if ($rows > 1) {
+							$result['message'] = 'Se encontraron '.$rows.' coincidencias';
+						} else {
+							$result['message'] = 'Solo existe una coincidencia';
+						}
 					} else {
 						$result['exception'] = 'No hay coincidencias';
 					}
@@ -37,11 +43,12 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 						if (is_uploaded_file($_FILES['create_archivo']['tmp_name'])) {
 							if ($categoria->setImagen($_FILES['create_archivo'], null)) {
 								if ($categoria->createCategoria()) {
+									$result['id'] = Database::getLastRowId();
+									$result['status'] = 1;
 									if ($categoria->saveFile($_FILES['create_archivo'], $categoria->getRuta(), $categoria->getImagen())) {
-										$result['status'] = 1;
+										$result['message'] = 'Categoría creada correctamente';
 									} else {
-										$result['status'] = 2;
-										$result['exception'] = 'No se guardó el archivo';
+										$result['message'] = 'Categoría creada. No se guardó el archivo';
 									}
 								} else {
 									$result['exception'] = 'Operación fallida';
@@ -84,23 +91,21 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 										$archivo = false;
 									}
 								} else {
-									if ($categoria->setImagen(null, $_POST['imagen_categoria'])) {
-										$result['exception'] = 'No se subió ningún archivo';
-									} else {
+									if (!$categoria->setImagen(null, $_POST['imagen_categoria'])) {
 										$result['exception'] = $categoria->getImageError();
 									}
 									$archivo = false;
 								}
 								if ($categoria->updateCategoria()) {
+									$result['status'] = 1;
 									if ($archivo) {
 										if ($categoria->saveFile($_FILES['update_archivo'], $categoria->getRuta(), $categoria->getImagen())) {
-											$result['status'] = 1;
+											$result['message'] = 'Categoría modificada correctamente';
 										} else {
-											$result['status'] = 2;
-											$result['exception'] = 'No se guardó el archivo';
+											$result['message'] = 'Categoría modificada. No se guardó el archivo';
 										}
 									} else {
-										$result['status'] = 3;
+										$result['message'] = 'Categoría modificada. No se subió ningún archivo';
 									}
 								} else {
 									$result['exception'] = 'Operación fallida';
@@ -119,14 +124,14 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 				}
             	break;
             case 'delete':
-				if ($categoria->setId($_POST['id_categoria'])) {
+				if ($categoria->setId($_POST['identifier'])) {
 					if ($categoria->getCategoria()) {
 						if ($categoria->deleteCategoria()) {
-							if ($categoria->deleteFile($categoria->getRuta(), $_POST['imagen_categoria'])) {
-								$result['status'] = 1;
+							$result['status'] = 1;
+							if ($categoria->deleteFile($categoria->getRuta(), $_POST['filename'])) {
+								$result['message'] = 'Categoría eliminada correctamente';
 							} else {
-								$result['status'] = 2;
-								$result['exception'] = 'No se borró el archivo';
+								$result['message'] = 'Categoría eliminada. No se borró el archivo';
 							}
 						} else {
 							$result['exception'] = 'Operación fallida';
@@ -141,10 +146,10 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 			default:
 				exit('Acción no disponible');
 		}
+		print(json_encode($result));
 	} else {
 		exit('Acceso no disponible');
 	}
-	print(json_encode($result));
 } else {
 	exit('Recurso denegado');
 }
