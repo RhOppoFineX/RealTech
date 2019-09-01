@@ -4,7 +4,7 @@ $(document).ready(function()
     showGreeting();
 
     //Increment the idle time counter every minute.
-    var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+    var idleInterval = setInterval(timerIncrement, 6000); // 1 minute
 
     //Zero the idle timer on mouse movement.
     $(this).mousemove(function (e) {
@@ -31,15 +31,11 @@ function showGreeting()
     $('#greeting').text(greeting);
 }
 
-
-$(document).ready(function () {
-    
-});
-
 function timerIncrement() {
     idleTime = idleTime + 1;    
-    if (idleTime > 1) { // 20 minutes        
+    if (idleTime > 1) { // 20 minutes          
         signOffIncative();
+        // sweetAlert(1, "Su sesión ha sido cerrada por inactividad", null);
         //window.location.reload();
     }
 }

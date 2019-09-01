@@ -37,7 +37,7 @@ Dashboard::headerTemplate('Administrar usuarios');
 <div id="modal-create" class="modal">
     <div class="modal-content">
         <h4 class="center-align">Crear usuario</h4>
-        <form method="post" id="form-create">
+        <form method="post" id="form-create" autocomplete="off">
             <div class="row">
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">person</i>
@@ -81,7 +81,7 @@ Dashboard::headerTemplate('Administrar usuarios');
 <div id="modal-update" class="modal">
     <div class="modal-content">
         <h4 class="center-align">Modificar usuario</h4>
-        <form method="post" id="form-update">
+        <form method="post" id="form-update" autocomplete="off">
             <input type="hidden" id="id_usuario" name="id_usuario"/>
             <div class="row">
                 <div class="input-field col s12 m6">
