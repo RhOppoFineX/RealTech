@@ -32,7 +32,7 @@ class Dashboard
 						<div class="navbar-fixed">
 							<nav class="indigo accent-3">
 								<div class="nav-wrapper">
-									<a href="main.php" class="brand-logo"><img src="../../resources/img/logo.png" height="60"></a>
+									<a href="main.php" class="brand-logo"><img src="../../resources/img/tecnologia.png" height="60"></a>
 									<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 									<ul class="right hide-on-med-and-down">
 										<li><a href="productos.php"><i class="material-icons left">shop</i>Productos</a></li>

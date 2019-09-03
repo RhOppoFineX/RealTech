@@ -10,8 +10,41 @@ class Usuarios extends Validator
 	private $clave = null;
 	private $Intentos = null;
 	private $Estado = null;
+	private $id_tipo_usuario = null;
+	private $Tipo_usuario = null;	
 
 	// Métodos para sobrecarga de propiedades
+
+	public function setTipo_usuario($value)
+	{
+		if($this->validateAlphabetic($value, 1, 20)){
+			$this->Tipo_usuario = $value;
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public function getTipo_usuario()
+	{
+		return $this->Tipo_usuario;
+	}
+
+	public function setId_Tipo_usuario($value)
+	{
+		if ($this->validateId($value)) {
+			$this->id_tipo_usuario = $value;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getId_Tipo_usuario()
+	{
+		return $this->id_tipo_usuario;
+	}
 
 	public function setIntentos($value)
 	{
@@ -135,11 +168,12 @@ class Usuarios extends Validator
 	// Métodos para manejar la sesión del usuario
 	public function checkAlias()
 	{
-		$sql = 'SELECT id_usuario FROM usuarios WHERE alias_usuario = ?  and Estado = 1 and Intentos < 5';
+		$sql = 'SELECT id_usuario, T.Tipo_usuario as Tipo_usuario FROM usuarios as U INNER JOIN Tipo_usuario as T ON U.Id_tipo_usuario = T.Id_tipo_usuario WHERE alias_usuario = ?  and U.Estado = 1 and Intentos < 5';
 		$params = array($this->alias);
 		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->id = $data['id_usuario'];
+			$this->Tipo_usuario = $data['Tipo_usuario'];
 			return true;
 		} else {
 			return false;
@@ -185,8 +219,8 @@ class Usuarios extends Validator
 	public function createUsuario()
 	{
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
-		$sql = 'INSERT INTO usuarios(nombres_usuario, apellidos_usuario, correo_usuario, alias_usuario, clave_usuario) VALUES(?, ?, ?, ?, ?)';
-		$params = array($this->nombres, $this->apellidos, $this->correo, $this->alias, $hash);
+		$sql = 'INSERT INTO usuarios(nombres_usuario, apellidos_usuario, correo_usuario, Id_tipo_usuario, alias_usuario, clave_usuario) VALUES(?, ?, ?, ?, ?, ?)';
+		$params = array($this->nombres, $this->apellidos, $this->correo, $this->id_tipo_usuario, $this->alias, $hash);
 		return Database::executeRow($sql, $params);
 	}
 

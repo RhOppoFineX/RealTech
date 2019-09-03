@@ -131,19 +131,23 @@ if (isset($_GET['action'])) {
                     if ($usuario->setApellidos($_POST['create_apellidos'])) {
                         if ($usuario->setCorreo($_POST['create_correo'])) {
                             if ($usuario->setAlias($_POST['create_alias'])) {
-                                if ($_POST['create_clave1'] == $_POST['create_clave2']) {
-                                    if ($usuario->setClave($_POST['create_clave1'])) {
-                                        if ($usuario->createUsuario()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Usuario creado correctamente';
+                                if($usuario->setId_Tipo_usuario($_POST['create_usuario'])){
+                                    if ($_POST['create_clave1'] == $_POST['create_clave2']) {
+                                        if ($usuario->setClave($_POST['create_clave1'])) {
+                                            if ($usuario->createUsuario()) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Usuario creado correctamente';
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = 'Clave menor a 8 caracteres';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 8 caracteres';
+                                        $result['exception'] = 'Claves diferentes';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Tipo de usuario incorrecto';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';
@@ -241,19 +245,23 @@ if (isset($_GET['action'])) {
                     if ($usuario->setApellidos($_POST['apellidos'])) {
                         if ($usuario->setCorreo($_POST['correo'])) {
                             if ($usuario->setAlias($_POST['alias'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->createUsuario()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Usuario registrado correctamente';
+                                if($usuario->setId_Tipo_usuario(1)){
+                                    if ($_POST['clave1'] == $_POST['clave2']) {
+                                        if ($usuario->setClave($_POST['clave1'])) {
+                                            if ($usuario->createUsuario()) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Usuario registrado correctamente';
+                                            } else {
+                                                $result['exception'] = 'Operación fallida';
+                                            }
                                         } else {
-                                            $result['exception'] = 'Operación fallida';
+                                            $result['exception'] = 'Clave menor a 8 caracteres';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 8 caracteres';
+                                        $result['exception'] = 'Claves diferentes';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Tipo de usuario inexistente';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';
@@ -278,7 +286,7 @@ if (isset($_GET['action'])) {
                                     if($usuario->aumentarIntentos()){
                                         $_SESSION['id_usuario'] = $usuario->getId();
                                         $_SESSION['alias_usuario'] = $usuario->getAlias();
-                                        //$_SESSION['Id_tipo_usuario'] = $usuario->getId_tipo_usuario();
+                                        $_SESSION['Tipo_usuario'] = $usuario->getTipo_usuario();
                                         $result['status'] = true;
                                         $result['message'] = 'Autenticación correcta';                                        
                                     } else {

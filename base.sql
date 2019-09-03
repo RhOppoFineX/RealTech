@@ -19,6 +19,12 @@ CREATE TABLE `productos` (
   FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
+create table Tipo_usuario(
+    Id_tipo_usuario Integer Unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Tipo_usuario varchar(20) UNIQUE NOT NULL,
+    Estado TINYINT(1) NOT NULL DEFAULT 1         
+);
+
 Create Table usuarios(
     id_usuario Integer Unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombres_usuario varchar(40) NOT NULL,
@@ -74,3 +80,5 @@ create table Detalle (
     foreign key (Id_pedido) references Pedido(Id_pedido),
     foreign key (Id_producto) references productos(Id_producto)    
 );
+
+INSERT INTO Tipo_usuario (Id_tipo_usuario, Tipo_usuario) VALUES (1, 'Admin'), (2,'Mercadeo');

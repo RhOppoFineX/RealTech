@@ -5,6 +5,8 @@ $(document).ready(function()
 
 // Constante para establecer la ruta y parámetros de comunicación con la API
 const api = '../../core/api/dashboard/usuarios.php?action=';
+const tipo_usuario = '../../core/api/dashboard/tipoUsuario.php?action=read';
+
 
 // Función para llenar tabla con los datos de los registros
 function fillTable(rows)
@@ -26,6 +28,7 @@ function fillTable(rows)
         `;
     });
     $('#tbody-read').html(content);
+    $('select').formSelect();
     $('.tooltipped').tooltip();
 }
 
@@ -92,6 +95,7 @@ $('#form-search').submit(function()
 function modalCreate()
 {
     $('#form-create')[0].reset();
+    fillSelect(tipo_usuario, 'create_usuario', null);
     $('#modal-create').modal('open');
 }
 
@@ -102,8 +106,11 @@ $('#form-create').submit(function()
     $.ajax({
         url: api + 'create',
         type: 'post',
-        data: $('#form-create').serialize(),
-        datatype: 'json'
+        data: new FormData($('#form-create')[0]),
+        datatype: 'json',
+        cache: false,
+        contentType: false,
+        processData: false
     })
     .done(function(response){
         // Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola

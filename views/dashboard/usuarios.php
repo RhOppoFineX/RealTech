@@ -1,6 +1,11 @@
 <?php
+
 require_once('../../core/helpers/dashboard.php');
 Dashboard::headerTemplate('Administrar usuarios');
+
+require_once '../../core/helpers/sesion.php';
+$_SESSION['Tipo_usuario_privilegios'] = ['Admin'];
+Session::verifcarPrivilegio();
 ?>
 <div class="row">
     <!-- Formulario de búsqueda -->
@@ -69,6 +74,13 @@ Dashboard::headerTemplate('Administrar usuarios');
                     <input id="create_clave2" type="password" name="create_clave2" class="validate" required/>
                     <label for="create_clave2">Confirmar clave</label>
                 </div>
+
+                <div class="input-field col s12 m6">
+                    <select id="create_usuario" name="create_usuario">
+                    </select>
+                    <label>Categoría</label>
+                </div>
+
             </div>
             <div class="row center-align">
                 <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons">cancel</i></a>
