@@ -11,7 +11,7 @@ Commerce::headerTemplate('Acceder');
 	</ul>
 	<!-- Formulario para crear cuenta -->
 	<div id="cuenta">
-		<form method="post">
+		<form method="post" id="form-create-client">
 			<div class="row">
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">account_box</i>
