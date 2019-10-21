@@ -14,7 +14,7 @@ class Dashboard
 				<head>
 					<meta charset="utf-8">
 					<title>Dashboard - '.$title.'</title>
-					<link type="image/png" rel="icon" href="../../resources/img/logo.png"/>
+					<link type="image/png" rel="icon" href="../../resources/img/tecnologia.png"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/icons.css"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/dashboard.css"/>

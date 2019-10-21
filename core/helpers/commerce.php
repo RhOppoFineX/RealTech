@@ -13,7 +13,7 @@ class Commerce
 			<head>
 				<meta charset="utf-8">
 				<title>Coffeeshop - '.$title.'</title>
-				<link type="image/png" rel="icon" href="../../resources/img/logo.png"/>
+				<link type="image/png" rel="icon" href="../../resources/img/tecnologia.png"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/icons.css"/>
 				<link type="text/css" rel="stylesheet" href="../../resources/css/commerce.css"/>
@@ -22,9 +22,9 @@ class Commerce
 			<body>
 				<header>
 					<div class="navbar-fixed">
-						<nav class="green">
+						<nav class="indigo accent-3">
 							<div class="nav-wrapper">
-								<a href="index.php" class="brand-logo"><img src="../../resources/img/logo.png" height="60"></a>
+								<a href="index.php" class="brand-logo"><img src="../../resources/img/tecnologia.png" height="60"></a>
 								<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 								<ul class="right hide-on-med-and-down">
 									<li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
@@ -49,7 +49,7 @@ class Commerce
 	{
 		print('
 				</main>
-				<footer class="page-footer green">
+				<footer class="page-footer indigo accent-3">
 					<div class="container">
 						<div class="row">
 							<div class="col s12 m6 l6">
@@ -70,7 +70,7 @@ class Commerce
 					</div>
 					<div class="footer-copyright">
 						<div class="container">
-							<span>© Coffeeshop, todos los derechos reservados.</span>
+							<span>© Realtech, todos los derechos reservados.</span>
 							<span class="grey-text text-lighten-4 right">Diseñado con <a class="red-text text-accent-1" href="http://materializecss.com/" target="_blank"><b>Materialize</b></a></span>
 						</div>
 					</div>
