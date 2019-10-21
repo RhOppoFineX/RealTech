@@ -86,7 +86,7 @@ Commerce::headerTemplate('Acceder');
     <div class="parallax">
       <img src="../../resources/img/amazon.jpg" alt="RealTech" class="responsive-img">
     </div>
-  </div>
+</div>
 <?php
 Commerce::footerTemplate('account.js');
 ?>

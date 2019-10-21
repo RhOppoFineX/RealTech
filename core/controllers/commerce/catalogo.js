@@ -6,6 +6,8 @@ $(document).ready(function()
 
 // Constante para establecer la ruta y parámetros de comunicación con la API
 const api = '../../core/api/commerce/catalogo.php?action=';
+const apiClientes = '../../core/api/commerce/clientes.php?site=commerce&action=';
+
 
 // Función para obtener y mostrar las categorías de productos
 function readCategorias()
@@ -172,4 +174,52 @@ function getProducto(id)
         // Se muestran en consola los posibles errores de la solicitud AJAX
         console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
     });
+}
+
+function agregarCarrito(id){    
+    $.ajax({
+        url: apiClientes + 'agregarCarrito',
+        type: 'post',
+        data:{
+            id_producto: id,
+            cantidad: $('#cantidad').val(),
+        },
+        datatype: 'json'
+    })
+    .done(function(response){
+        //Se verifica si la respuesta de la API es una cadena JSON, sino se muestra el resultado en consola
+        if (isJSONString(response)) {
+            const result = JSON.parse(response);
+            //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
+            if (result.status) {
+                if (result.status == 1) {
+                    sweetAlert(1, 'Producto agregado al carrito', null);
+                } else if (result.status == 2) {
+                    sweetAlert(3, 'Producto no agregado. ' + result.exception, null);
+                }
+            } else {
+
+            }
+        } else {
+            console.log(response);
+        }
+    })
+    .fail(function(jqXHR){
+        //Se muestran en consola los posibles errores de la solicitud AJAX
+        console.log('Error: ' + jqXHR.status + ' ' + jqXHR.statusText);
+    });
+
+}
+
+
+function error(response){
+    switch (response){
+        case 'Contenido no disponible':
+            mensaje = 'No hay productos para esta categoría';
+            break;
+        default:
+            mensaje = 'No hay productos para esta categoría'
+            break;
+    }
+    return mensaje;
 }
