@@ -25,6 +25,12 @@ create table Tipo_usuario(
     Estado TINYINT(1) NOT NULL DEFAULT 1         
 );
 
+CREATE TABLE garantia(
+    id_garantia INTEGER Unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    meses VARCHAR(50) NOT NULL,
+    estado VARCHAR(4) NOT NULL
+);
+
 Create Table usuarios(
     id_usuario Integer Unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombres_usuario varchar(40) NOT NULL,

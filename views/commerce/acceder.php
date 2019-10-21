@@ -29,10 +29,11 @@ Commerce::headerTemplate('Acceder');
 					<label for="correo">Correo electrónico</label>
 				</div>
 				<div class="input-field col s12 m6">
-					<i class="material-icons prefix">phone</i>
-					<input type="text" id="telefono" name="telefono" class="validate">
-					<label for="telefono">Teléfono</label>
+					<i class="material-icons prefix">account_box</i>
+					<input type="text" id="alias" name="alias" class="validate">
+					<label for="alias">User Name</label>
 				</div>
+				
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">security</i>
 					<input type="password" id="clave1" name="clave1" class="validate">
@@ -42,12 +43,7 @@ Commerce::headerTemplate('Acceder');
 					<i class="material-icons prefix">security</i>
 					<input type="password" id="clave2" name="clave2" class="validate">
 					<label for="clave2">Confirmar contraseña</label>
-				</div>
-				<div class="input-field col s12">
-					<i class="material-icons prefix">place</i>
-					<textarea id="direccion" name="direccion" class="materialize-textarea"></textarea>
-					<label for="direccion">Dirección</label>
-				</div>
+				</div>				
 				<label class="center-align col s12">
 					<input type="checkbox" id="condicion" name="condicion">
 					<span>Acepto <a href="#terminos" class="modal-trigger">términos y condiciones</a></span>

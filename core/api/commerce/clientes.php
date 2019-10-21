@@ -292,7 +292,7 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                 break;
                 case 'register':
                 $_POST = $cliente->validateForm($_POST);
-                $captcha = $_POST['g-recaptcha-response'];
+                
                 if ($cliente->setNombres($_POST['nombres'])) {
                     if ($cliente->setApellidos($_POST['apellidos'])) {
                         if ($cliente->setCorreo($_POST['correo'])) {

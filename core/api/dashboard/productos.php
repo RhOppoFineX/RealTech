@@ -170,6 +170,41 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Producto incorrecto';
                 }
                 break;
+
+            case 'cantidadP':
+                if($result['dataset'] = $producto->grafico1()){
+                    $result['status'] = 1;
+                }else{
+                    $result['exception'] = 'No se encontraron datos';
+                }
+            break;
+            
+        case 'precioP':
+            if($result['dataset'] = $producto->grafico2()){
+                $result['status'] = 1;
+            }else{
+                $result['exception'] = 'No se encontraron datos';
+            }
+        break;
+
+        case 'EstadoP':
+            if($result['dataset'] = $producto->graficoEstado()){
+                $result['status'] = 1;
+            }else{
+                $result['exception'] = 'No se encontraron datos';
+            }
+        break;
+
+    case 'MayorP':
+        if($result['dataset'] = $producto->graficoMayor()){
+            $result['status'] = 1;
+        }else{
+            $result['exception'] = 'No se encontraron datos';
+        }
+    break;     
+
+                
+
             default:
                 exit('Acción no disponible');
         }
