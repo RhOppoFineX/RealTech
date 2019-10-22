@@ -84,7 +84,7 @@ create table detalle_pedido (
 );
 
 CREATE TABLE pre_pedido(
-   id_prepedido int(10) UNSIGNED PRIMARY KEY NOT NULL,
+   id_prepedido int(10) UNSIGNED PRIMARY KEY NOT NULL Auto_Increment,
    id_cliente int(10) UNSIGNED NOT NULL,
    id_producto int(10) UNSIGNED NOT NULL,
    cantidad int(10) NOT NULL,

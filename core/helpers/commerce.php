@@ -30,6 +30,7 @@ class Commerce
 									<li><a href="index.php"><i class="material-icons left">view_module</i>Catálogo</a></li>
 									<li><a href="#"><i class="material-icons left">shopping_cart</i>Compras</a></li>
 									<li><a href="acceder.php"><i class="material-icons left">person</i>Acceder</a></li>
+									<li><a href="carrito.php"><i class="material-icons left">add_shopping_cart</i>Carrito</a></li>
 								</ul>
 							</div>
 						</nav>
