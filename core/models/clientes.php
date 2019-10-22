@@ -225,7 +225,7 @@ class Clientes extends Validator
 	{
 		$sql = 'SELECT id_cliente FROM clientes WHERE Usuario_cliente = ?';
 		$params = array($this->usuario);
-		$data = Conexion::getRow($sql, $params);
+		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->id = $data['id_cliente'];
 			return true;
@@ -239,7 +239,7 @@ class Clientes extends Validator
 	{
 		$sql = 'SELECT Clave_cliente FROM clientes WHERE id_cliente = ?';
 		$params = array($this->id);
-		$data = Conexion::getRow($sql, $params);
+		$data = Database::getRow($sql, $params);
 		if (password_verify($this->clave, $data['Clave_cliente'])) {
 			return true;
 		} else {
@@ -251,7 +251,7 @@ class Clientes extends Validator
 	{
 		$sql = 'SELECT correo_cliente FROM clientes WHERE correo_cliente = ?';
 		$params = array($this->correo);
-		return Conexion::getRow($sql, $params);
+		return Database::getRow($sql, $params);
 	}
 
 	public function changePassword()
@@ -259,21 +259,21 @@ class Clientes extends Validator
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'UPDATE clientes SET clave_cliente = ? WHERE id_cliente = ?';
 		$params = array($hash, $this->id);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function updateToken()
 	{
 		$sql = 'UPDATE clientes SET Token_cliente = ? WHERE Correo_cliente = ?';
 		$params = array($this->token, $this->correo);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function getDatosToken()
 	{
 		$sql = 'SELECT id_cliente, Nombre_cliente, Apellido_cliente, Usuario_cliente, Correo_cliente FROM clientes WHERE Token_cliente = ?';
 		$params = array($this->token);
-		$data = Conexion::getRow($sql, $params);
+		$data = Database::getRow($sql, $params);
 		if ($data) {
 			$this->id = $data['id_cliente'];
 			return true;
@@ -286,7 +286,7 @@ class Clientes extends Validator
 	{
 		$sql = 'SELECT id_cliente, Nombre_cliente, Apellido_cliente, Usuario_cliente, Correo_cliente, CLave_cliente FROM clientes ORDER BY Apellido_cliente';
 		$params = array(null);
-		return Conexion::getRows($sql, $params);
+		return Database::getRows($sql, $params);
 	}
 
 	public function createClientes()
@@ -294,79 +294,79 @@ class Clientes extends Validator
 		$hash = password_hash($this->clave, PASSWORD_DEFAULT);
 		$sql = 'INSERT INTO clientes(Nombre_cliente, Apellido_cliente, Usuario_cliente, Correo_cliente, Clave_cliente) VALUES(?, ?, ?, ?, ?)';
 		$params = array($this->nombres, $this->apellidos, $this->usuario, $this->correo, $hash);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function getCliente()
 	{
 		$sql = 'SELECT id_cliente, Nombre_cliente, Apellido_cliente, Usuario_cliente, Correo_cliente FROM clientes WHERE id_cliente = ?';
 		$params = array($this->id);
-		return Conexion::getRow($sql, $params);
+		return Database::getRow($sql, $params);
 	}
 
 	public function updateCliente()
 	{
 		$sql = 'UPDATE clientes SET Nombre_cliente = ?, Apellido_cliente = ?, Usuario_cliente = ?, Correo_cliente = ? WHERE id_cliente = ?';
 		$params = array($this->nombres, $this->apellidos, $this->usuario, $this->correo, $this->id);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function agregarCarrito()
 	{
 		$sql = 'INSERT INTO pre_pedido(id_cliente, id_producto, cantidad) VALUES(?, ?, ?)';
 		$params = array($this->IdCliente, $this->IdProducto, $this->cantidad);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function readCarrito()
 	{
 		$sql = 'SELECT id_prepedido, id_cliente, id_producto, cantidad, Imagen_producto, Nombre_producto, Precio_producto FROM pre_pedido INNER JOIN productos USING (id_producto) WHERE id_cliente = ?';
 		$params = array($this->id);
-		return Conexion::getRows($sql, $params);
+		return Database::getRows($sql, $params);
 	}
 
 	public function deleteCliente()
 	{
 		$sql = 'DELETE FROM clientes WHERE id_cliente = ?';
 		$params = array($this->id);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function deleteCarrito()
 	{
 		$sql = 'DELETE FROM pre_pedido WHERE id_prepedido = ?';
 		$params = array($this->IdPrepedido);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function getPre(){
 		$sql = 'SELECT id_prepedido FROM pre_pedido WHERE id_prepedido = ?';
 		$params = array($this->IdPrepedido);
-		return Conexion::getRow($sql, $params);
+		return Database::getRow($sql, $params);
 	}
 
 	public function getPrepedido(){
 		$sql = 'SELECT id_prepedido, id_cliente, id_producto, cantidad FROM pre_pedido WHERE id_cliente = ?';
 		$params = array($this->id);
-		return Conexion::getRows($sql, $params);
+		return Database::getRows($sql, $params);
 	}
 
 	public function createPedido(){
 		$sql = 'INSERT INTO pedidos(id_cliente, Estado_pedido) VALUES (?, 1)';
 		$params = array($this->IdCliente);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function createDetallePedido(){
 		$sql = 'INSERT INTO detalle_pedido(id_pedido, id_producto, cantidad) VALUES (?, ?, ?)';
 		$params = array($this->IdPedido, $this->IdProducto, $this->cantidad);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 	public function readUltimoPedido(){
 		$sql = 'SELECT MAX(id_pedido) AS UltimoPedido FROM pedidos';
 		$params = array(null);
-		$data = Conexion::getRow($sql, $params);
+		$data = Database::getRow($sql, $params);
 		if($data){
 			$this->IdPedido = $data['UltimoPedido'];
 			return true;
@@ -378,7 +378,7 @@ class Clientes extends Validator
 	public function readPrepedido(){
 		$sql = 'SELECT id_prepedido, id_cliente, id_producto, cantidad FROM pre_pedido';
 		$params = array(null);
-		$data = Conexion::executeRow($sql, $params);
+		$data = Database::executeRow($sql, $params);
 		if($data){
 			$this->IdProducto = $data['id_producto'];
 			$this->cantidad = $data['cantidad'];
@@ -392,7 +392,7 @@ class Clientes extends Validator
 	{
 		$sql = 'DELETE FROM pre_pedido WHERE id_cliente = ?';
 		$params = array($this->IdCliente);
-		return Conexion::executeRow($sql, $params);
+		return Database::executeRow($sql, $params);
 	}
 
 

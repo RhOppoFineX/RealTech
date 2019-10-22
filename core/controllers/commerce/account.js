@@ -78,7 +78,7 @@ $('#form-profile').submit(function()
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-profile').modal('hide');
-                sweetAlert(1, 'Perfil modificado correctamente', 'inicio.php');
+                sweetAlert(1, 'Perfil modificado correctamente', 'index.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }
@@ -109,7 +109,7 @@ $('#form-password').submit(function()
             //Se comprueba si el resultado es satisfactorio, sino se muestra la excepción
             if (result.status) {
                 $('#modal-password').modal('hide');
-                sweetAlert(1, 'Contraseña cambiada correctamente', 'inicio.php');
+                sweetAlert(1, 'Contraseña cambiada correctamente', 'index.php');
             } else {
                 sweetAlert(2, result.exception, null);
             }

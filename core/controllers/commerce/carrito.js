@@ -42,7 +42,7 @@ function readCarrito(){
                 $('#tbody-read').html(content);
                 $('#total').html(total);
             } else {
-                sweetAlert(3, 'No hay productos en el carrito', 'inicio.php');
+                sweetAlert(3, 'No hay productos en el carrito', 'index.php');
             }
         } else {
             console.log(response);

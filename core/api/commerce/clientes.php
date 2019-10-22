@@ -19,9 +19,9 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
 		switch ($_GET['action']) {
             case 'logout':
                 if (session_destroy()) {
-                    header('location: ../../views/public/inicio.php');
+                    header('location: ../../../views/public/index.php');
                 } else {
-                    header('location: ../../views/public/inicio.php');
+                    header('location: ../../../views/public/index.php');
                 }
             break;
 			case 'read':
@@ -300,15 +300,13 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                                 if($cliente->setDireccion($_POST['direccion'])){
                                     if ($_POST['clave1'] == $_POST['clave2']) {
                                         if ($cliente->setClave($_POST['clave1'])) {
-                                            if(!$captcha){
-                                                $result['exception'] = 'Verifica el captcha';
-                                            } else {
+                                             
                                                 if ($cliente->createClientes()) {
                                                     $result['status'] = 1;
                                                 } else {
                                                     $result['exception'] = 'Operación fallida';
                                                 }  
-                                            }
+                                            
                                         } else {
                                             $result['exception'] = 'Clave menor a 6 caracteres';
                                         }

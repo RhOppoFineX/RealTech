@@ -55,43 +55,42 @@ create table Municipio(
     foreign key (id_departamento) references Departamento(id_departamento)
 );
 
-CREATE TABLE `clientes` (
-  `id_cliente` int(10) UNSIGNED NOT NULL,
-  `Nombre_cliente` varchar(50) NOT NULL,
-  `Apellido_cliente` varchar(50) NOT NULL,
-  `Usuario_cliente` varchar(20) NOT NULL,
-  `Correo_cliente` varchar(100) NOT NULL,
-  `Clave_cliente` varchar(100) NOT NULL,
-  `Token_cliente` varchar(100) DEFAULT NULL
-)
-
--- create table Cliente (
---     Id_cliente int unsigned primary key not null Auto_Increment,
---     Nombres varchar(25) not null,
---     Apellidos varchar(25) not null,    
---     Correo varchar(50) not null,    
---     pass varchar(150) not null,    
---     Direcccion varchar(150) not null,
---     Id_estado TINYINT(1) unsigned not null,
---     Id_municipio int unsigned not null,
---     foreign key (Id_municipio) references Municipio(Id_municipio)  
--- );
-
-create table Pedido(
-    Id_pedido int unsigned primary key not null Auto_Increment,
-    Fecha date not null,
-    Id_cliente int unsigned not null,
-    Precio_total numeric(6,2) not null,
-    foreign key (Id_cliente) references Cliente(Id_cliente)    
+CREATE TABLE clientes (
+  id_cliente int UNSIGNED PRIMARY KEY NOT NULL Auto_Increment,
+  Nombre_cliente varchar(50) NOT NULL,
+  Apellido_cliente varchar(50) NOT NULL,
+  Usuario_cliente varchar(20) NOT NULL,
+  Correo_cliente varchar(100) NOT NULL,
+  Clave_cliente varchar(100) NOT NULL,
+  Token_cliente varchar(100) DEFAULT NULL
 );
 
-create table Detalle (
-    Id_detalle int unsigned primary key not null Auto_Increment,
-    Id_producto int unsigned not null,
-    Cantidad_pedido int not null,
-    Id_pedido int unsigned not null,
-    foreign key (Id_pedido) references Pedido(Id_pedido),
-    foreign key (Id_producto) references productos(Id_producto)    
+
+create table pedidos(
+    id_pedido int unsigned primary key not null Auto_Increment,
+    fecha_pedido datetime not null,
+    id_cliente int unsigned not null,
+    estado_pedido TINYINT(1) not null DEFAULT '1',
+    foreign key (id_cliente) references clientes(id_cliente)    
+);
+
+create table detalle_pedido (
+    id_detalle int unsigned primary key not null Auto_Increment,
+    id_producto int unsigned not null,
+    cantidad int not null,
+    id_pedido int unsigned not null,
+    foreign key (id_pedido) references pedidos(id_pedido),
+    foreign key (id_producto) references productos(id_producto)    
+);
+
+CREATE TABLE pre_pedido(
+   id_prepedido int(10) UNSIGNED PRIMARY KEY NOT NULL,
+   id_cliente int(10) UNSIGNED NOT NULL,
+   id_producto int(10) UNSIGNED NOT NULL,
+   cantidad int(10) NOT NULL,
+   foreign key (id_producto) references productos(id_producto),
+   foreign key (id_cliente) references clientes(id_cliente) 
+   
 );
 
 INSERT INTO Tipo_usuario (Id_tipo_usuario, Tipo_usuario) VALUES (1, 'Admin'), (2,'Mercadeo');

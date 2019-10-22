@@ -64,12 +64,12 @@ Commerce::headerTemplate('Acceder');
 	</div>
 	<!-- Formulario para iniciar sesión -->
 	<div id="sesion">
-		<form method="post">
+		<form method="post" id="form-sesion">
 			<div class="row">
 				<div class="input-field col s12 m6 offset-m3">
-					<i class="material-icons prefix">email</i>
-					<input type="email" id="usuario" name="usuario" class="validate">
-					<label for="usuario">Correo electrónico</label>
+					<i class="material-icons prefix">security</i>
+					<input type="text" id="usuario" name="usuario" class="validate">
+					<label for="usuario">Nombre de usuario</label>
 				</div>
 				<div class="input-field col s12 m6 offset-m3">
 					<i class="material-icons prefix">security</i>
@@ -90,5 +90,5 @@ Commerce::headerTemplate('Acceder');
     </div>
 </div>
 <?php
-Commerce::footerTemplate('register.js');
+Commerce::footerTemplate('index.js');
 ?>
