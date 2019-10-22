@@ -23,10 +23,10 @@ Dashboard::headerTemplate('Administrar categorías');
 <table class="highlight">
     <thead>
         <tr>
-            <th>IMAGEN</th>
-            <th>NOMBRE</th>
-            <th>DESCRIPCIÓN</th>
-            <th>ACCIÓN</th>
+            <th class="lang" key="categoria-imagen">IMAGEN</th>
+            <th class="lang" key="categoria-nombre">NOMBRE</th>
+            <th class="lang" key="categoria-descripcion">DESCRIPCIÓN</th>
+            <th class="lang" key="categoria-accion">ACCIÓN</th>
         </tr>
     </thead>
     <tbody id="tbody-read">

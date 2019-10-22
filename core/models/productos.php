@@ -174,10 +174,10 @@ class Productos extends Validator
 
 	public function grafico1()
 	{
-		$sql = 'SELECT COUNT(p.id_producto) AS IdProducto, c.nombre 
-		FROM producto p 
-		INNER JOIN categoria c USING(id_categoria) 
-		GROUP BY nombre';
+		$sql = 'SELECT COUNT(p.id_producto) AS IdProducto, c.nombre_categoria as categoria
+		FROM productos as p 
+		INNER JOIN categorias c USING(id_categoria) 
+		GROUP BY id_producto';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
@@ -185,33 +185,31 @@ class Productos extends Validator
 	public function grafico2()
 	{
 		$sql = 'SELECT COUNT(p.id_producto) AS IdProducto, g.meses 
-		FROM producto p 
-		INNER JOIN garantia g USING(id_garantia) 
-		GROUP BY meses';
+		FROM productos as p 
+		INNER JOIN garantia as g USING(id_garantia) 
+		GROUP BY g.meses';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 
 	public function grafico3()
 	{
-		$sql = 'SELECT id_garantia, garantia FROM garantia';
+		$sql = 'SELECT id_garantia, meses FROM garantia';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 
 	public function graficoEstado()
 	{
-		$sql = 'SELECT COUNT(p.id_producto) AS IdProducto, e.estado 
-		FROM producto p 
-		INNER JOIN estados e USING(id_estado) 
-		GROUP BY estado';
+		$sql = 'SELECT COUNT(p.id_producto) AS IdProducto, estado_producto as estado 
+		FROM productos as p GROUP BY estado_producto';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}
 
 	public function graficoMayor()
 	{
-		$sql = 'SELECT nombre, precio FROM producto ORDER BY precio ASC';
+		$sql = 'SELECT nombre_producto, precio_producto FROM productos ORDER BY precio_producto ASC';
 		$params = array(null);
 		return Database::getRows($sql, $params);
 	}

@@ -28,11 +28,11 @@ Session::verifcarPrivilegio();
 <table class="highlight">
     <thead>
         <tr>
-            <th>APELLIDOS</th>
-            <th>NOMBRES</th>
-            <th>CORREO</th>
-            <th>ALIAS</th>
-            <th>ACCIÓN</th>
+            <th class="lang" key="usuarios-apellidos">APELLIDOS</th>
+            <th class="lang" key="usuarios-nombres">NOMBRES</th>
+            <th class="lang" key="usuarios-correo">CORREO</th>
+            <th class="lang" key="usuarios-alias">ALIAS</th>
+            <th class="lang" key="usuarios-accion">ACCIÓN</th>
         </tr>
     </thead>
     <tbody id="tbody-read">

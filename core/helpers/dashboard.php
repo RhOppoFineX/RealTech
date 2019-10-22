@@ -13,7 +13,7 @@ class Dashboard
 			<html lang="es"
 				<head>
 					<meta charset="utf-8">
-					<title>Dashboard - '.$title.'</title>
+					<title class="lang" key="saludazo">Dashboard - '.$title.'</title>
 					<link type="image/png" rel="icon" href="../../resources/img/tecnologia.png"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/materialize.min.css"/>
 					<link type="text/css" rel="stylesheet" href="../../resources/css/icons.css"/>
@@ -35,9 +35,11 @@ class Dashboard
 									<a href="main.php" class="brand-logo"><img src="../../resources/img/tecnologia.png" height="60"></a>
 									<a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 									<ul class="right hide-on-med-and-down">
-										<li><a href="productos.php"><i class="material-icons left">shop</i>Productos</a></li>
-										<li><a href="categorias.php"><i class="material-icons left">shop_two</i>Categorías</a></li>
-										<li><a href="usuarios.php"><i class="material-icons left">group</i>Usuarios</a></li>
+										<li> <a class="englishOnclick" href="#" onclick="showEn()">ENGLISH</a> </li>
+										<li> <a class="españolOnclick" href="#" onclick="showEs()">ESPAÑOL</a> </li>
+										<li><a href="productos.php" class="lang" key="menu-producto"><i class="material-icons left">shop</i>Productos</a></li>
+										<li><a href="categorias.php" class="lang" key="menu-categoria"><i class="material-icons left">shop_two</i>Categorías</a></li>
+										<li><a href="usuarios.php" class="lang" key="menu-usuarios"><i class="material-icons left">group</i>Usuarios</a></li>
 										<li><a href="#" class="dropdown-trigger" data-target="dropdown"><i class="material-icons left">verified_user</i>Cuenta: <b>'.$_SESSION['alias_usuario'].'</b></a></li>
 									</ul>
 									<ul id="dropdown" class="dropdown-content">
@@ -49,10 +51,12 @@ class Dashboard
 							</nav>
 						</div>
 						<ul class="sidenav" id="mobile">
+						<li> <a class="englishOnclick" href="#" onclick="showEn()">EN</a> </li>
+						<li> <a class="españolOnclick" href="#" onclick="showEs()">ES</a> </li>
 							<li><a href="productos.php"><i class="material-icons">shop</i>Productos</a></li>
 							<li><a href="categorias.php"><i class="material-icons">shop_two</i>Categorías</a></li>
 							<li><a href="usuarios.php"><i class="material-icons">group</i>Usuarios</a></li>
-							<li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>'.$_SESSION['alias_usuario'].'</b></a></li>
+							<li><a class="dropdown-trigger" href="#" data-target="dropdown-mobile"><i class="material-icons">verified_user</i>Cuenta: <b>'.$_SESSION['alias_usuario'].'</b></a></li>							
 						</ul>
 						<ul id="dropdown-mobile" class="dropdown-content">
 							<li><a href="#" onclick="modalProfile()">Editar perfil</a></li>
@@ -61,7 +65,7 @@ class Dashboard
 						</ul>
 					</header>
 					<main class="container">
-						<h3 class="center-align">'.$title.'</h3>
+						<h3 class="center-align lang" key="saludazo">'.$title.'</h3>
 				');
 			} else {
 				header('location: main.php');
@@ -82,7 +86,7 @@ class Dashboard
 						</div>
 					</header>
 					<main class="container">
-						<h3 class="center-align">'.$title.'</h3>
+						<h3 class="center-align lang" key="saludazo">'.$title.'</h3>
 				');
 			}
 		}
@@ -117,9 +121,11 @@ class Dashboard
 					<script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
 					<script type="text/javascript" src="../../resources/js/dashboard.js"></script>
 					<script type="text/javascript" src="../../core/helpers/validator.js"></script>
-					<script type="text/javascript" src="../../core/helpers/components.js"></script>
-					<script type="text/javascript" src="../../core/controllers/dashboard/account.js"></script>
+					<script type="text/javascript" src="../../core/helpers/components.js"></script>					
+					<script type="text/javascript" src="../../core/controllers/dashboard/account.js"></script>				
+					<script src="../../core/helpers/traductor-dashboard.js"></script>	
 					<script type="text/javascript" src="../../core/controllers/dashboard/'.$controller.'"></script>
+					
 				</body>
 			</html>
 		');

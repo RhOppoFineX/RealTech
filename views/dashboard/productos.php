@@ -23,12 +23,12 @@ Dashboard::headerTemplate('Administrar productos');
 <table class="highlight">
     <thead>
         <tr>
-            <th>IMAGEN</th>
-			<th>NOMBRE</th>
-			<th>PRECIO (US$)</th>
-			<th>CATEGORÍA</th>
-			<th>ESTADO</th>
-			<th>ACCIÓN</th>
+            <th class="lang" key="producto-imagen">IMAGEN</th>
+			<th class="lang" key="producto-nombre">NOMBRE</th>
+			<th class="lang" key="producto-precio">PRECIO (US$)</th>
+			<th class="lang" key="producto-categoria">CATEGORÍA</th>
+			<th class="lang" key="producto-estado">ESTADO</th>
+			<th class="lang" key="producto-accion">ACCIÓN</th>
         </tr>
     </thead>
     <tbody id="tbody-read">

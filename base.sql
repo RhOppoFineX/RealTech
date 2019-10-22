@@ -55,20 +55,27 @@ create table Municipio(
     foreign key (id_departamento) references Departamento(id_departamento)
 );
 
-create table Cliente (
-    Id_cliente int unsigned primary key not null Auto_Increment,
-    Nombres varchar(25) not null,
-    Apellidos varchar(25) not null,    
-    Correo varchar(50) not null,
-    Genero varchar(15) not null,
-    pass varchar(150) not null,
-    Dui varchar(11) not null,
-    Fecha_nacimiento date not null,
-    Direcccion varchar(150) not null,
-    Id_estado TINYINT(1) unsigned not null,
-    Id_municipio int unsigned not null,
-    foreign key (Id_municipio) references Municipio(Id_municipio)  
-);
+CREATE TABLE `clientes` (
+  `id_cliente` int(10) UNSIGNED NOT NULL,
+  `Nombre_cliente` varchar(50) NOT NULL,
+  `Apellido_cliente` varchar(50) NOT NULL,
+  `Usuario_cliente` varchar(20) NOT NULL,
+  `Correo_cliente` varchar(100) NOT NULL,
+  `Clave_cliente` varchar(100) NOT NULL,
+  `Token_cliente` varchar(100) DEFAULT NULL
+)
+
+-- create table Cliente (
+--     Id_cliente int unsigned primary key not null Auto_Increment,
+--     Nombres varchar(25) not null,
+--     Apellidos varchar(25) not null,    
+--     Correo varchar(50) not null,    
+--     pass varchar(150) not null,    
+--     Direcccion varchar(150) not null,
+--     Id_estado TINYINT(1) unsigned not null,
+--     Id_municipio int unsigned not null,
+--     foreign key (Id_municipio) references Municipio(Id_municipio)  
+-- );
 
 create table Pedido(
     Id_pedido int unsigned primary key not null Auto_Increment,
@@ -88,3 +95,6 @@ create table Detalle (
 );
 
 INSERT INTO Tipo_usuario (Id_tipo_usuario, Tipo_usuario) VALUES (1, 'Admin'), (2,'Mercadeo');
+INSERT INTO garantia (id_garantia, meses, estado) VALUES (1, '3 meses', 1);
+INSERT INTO garantia (id_garantia, meses, estado) VALUES (2, '6 meses', 1);
+INSERT INTO garantia (id_garantia, meses, estado) VALUES (3, '1 meses', 1);

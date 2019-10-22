@@ -195,6 +195,14 @@ if (isset($_GET['action'])) {
             }
         break;
 
+    case 'garantiaP':
+        if($result['dataset'] = $producto->grafico3()){
+            $result['status'] = 1;
+        }else{
+            $result['exception'] = 'No se encontraron datos';
+        }
+    break;
+
     case 'MayorP':
         if($result['dataset'] = $producto->graficoMayor()){
             $result['status'] = 1;

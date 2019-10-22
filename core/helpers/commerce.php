@@ -81,7 +81,9 @@ class Commerce
 				<script type="text/javascript" src="../../resources/js/commerce.js"></script>
 				<script type="text/javascript" src="../../core/helpers/validator.js"></script>
 				<script type="text/javascript" src="../../core/helpers/components.js"></script>
+				<script type="text/javascript" src="../../core/controllers/commerce/account.js"></script>
 				<script type="text/javascript" src="../../core/controllers/commerce/'.$controller.'"></script>
+
 			</body>
 			</html>
 		');

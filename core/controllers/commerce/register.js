@@ -3,13 +3,13 @@ const apiRegister = '../../core/api/commerce/clientes.php?site=commerce&action='
 
 
 //Función para validar el usuario al momento de iniciar sesión
-$('#form-register').submit(function()
+$('#form-create-client').submit(function()
 {
     event.preventDefault();
     $.ajax({
         url: apiRegister + 'register',
         type: 'post',
-        data: $('#form-register').serialize(),
+        data: $('#form-create-client').serialize(),
         datatype: 'json'
     })
     .done(function(response){

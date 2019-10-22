@@ -1,5 +1,4 @@
 var idleTime = 0;
-
 const apiProductos = '../../core/api/dashboard/productos.php?action=';
 const apiGarantia = '../../core/api/dashboard/garantias.php?action='
 
@@ -69,7 +68,7 @@ function grafico1() {
                 let cantidad = [];
                 result.dataset.forEach(function (rows) {
                     id.push(rows.IdProducto);
-                    cantidad.push(rows.nombre);
+                    cantidad.push(rows.categoria);
                 });
                 graficoBarra('grafico1', cantidad, id, 'Cantidad de producto', 'Grafico');
             } else {
@@ -163,7 +162,7 @@ function graficoEstado() {
                 let estado = [];
                 result.dataset.forEach(function (rows) {
                     idEstado.push(rows.IdProducto);
-                    estado.push(rows.estado);
+                    estado.push(rows.estado==1 ? 'Activo' : 'Inactivo');
                 });
                 graficoEsta('grafico4', estado, idEstado, 'Cantidad de usuarios', 'Grafico');
             } else {
@@ -190,8 +189,8 @@ function graficoMayorcito() {
                 let nombrehiola = [];
                 let productouid = [];
                 result.dataset.forEach(function (rows) {
-                    nombrehiola.push(rows.nombre);
-                    productouid.push(rows.producto);
+                    nombrehiola.push(rows.nombre_producto);
+                    productouid.push(rows.precio_producto);
                 });
                 graficoMayorhola('grafico5', nombrehiola, productouid, 'Cantidad de producto', 'Grafico');
             } else {

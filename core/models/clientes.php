@@ -16,6 +16,7 @@ class Clientes extends Validator
 	private $IdPedido = null;
 	private $FechaPedido = null;
 	private $EstadoPedido = null;
+	private $direccion = null;
 
 	//Métodos para sobrecarga de propiedades
 	public function setId($value)
@@ -395,4 +396,24 @@ class Clientes extends Validator
 	}
 
 
+
+	/**
+	 * Get the value of direccion
+	 */ 
+	public function getDireccion()
+	{
+		return $this->direccion;
+	}
+
+	/**
+	 * Set the value of direccion
+	 *
+	 * @return  self
+	 */ 
+	public function setDireccion($direccion)
+	{		
+		$this->direccion = $direccion;
+
+		return true;
+	}
 }

@@ -15,33 +15,39 @@ Commerce::headerTemplate('Acceder');
 			<div class="row">
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">account_box</i>
-					<input type="text" id="nombres" name="nombres" class="validate">
+					<input type="text" id="nombres" name="nombres" class="validate" required>
 					<label for="nombres">Nombres</label>
 				</div>
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">account_box</i>
-					<input type="text" id="apellidos" name="apellidos" class="validate">
+					<input type="text" id="apellidos" name="apellidos" class="validate" required>
 					<label for="apellidos">Apellidos</label>
 				</div>
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">email</i>
-					<input type="email" id="correo" name="correo" class="validate">
+					<input type="email" id="correo" name="correo" class="validate" required>
 					<label for="correo">Correo electrónico</label>
 				</div>
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">account_box</i>
-					<input type="text" id="alias" name="alias" class="validate">
+					<input type="text" id="alias" name="alias" class="validate" required>
 					<label for="alias">User Name</label>
+				</div>
+
+				<div class="input-field col s12">
+					<i class="material-icons prefix">place</i>
+					<textarea id="direccion" name="direccion" class="materialize-textarea" required></textarea>
+					<label for="direccion">Dirección</label>
 				</div>
 				
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">security</i>
-					<input type="password" id="clave1" name="clave1" class="validate">
+					<input type="password" id="clave1" name="clave1" class="validate" required>
 					<label for="clave1">Contraseña</label>
 				</div>
 				<div class="input-field col s12 m6">
 					<i class="material-icons prefix">security</i>
-					<input type="password" id="clave2" name="clave2" class="validate">
+					<input type="password" id="clave2" name="clave2" class="validate" required>
 					<label for="clave2">Confirmar contraseña</label>
 				</div>				
 				<label class="center-align col s12">
@@ -84,5 +90,5 @@ Commerce::headerTemplate('Acceder');
     </div>
 </div>
 <?php
-Commerce::footerTemplate('account.js');
+Commerce::footerTemplate('register.js');
 ?>

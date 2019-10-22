@@ -1,15 +1,15 @@
 <?php
-require_once('../../core/helpers/Conexion.php');
-require_once('../../core/helpers/validator.php');
-require_once('../../core/models/clientes.php');
+require_once('../../../core/helpers/database.php');
+require_once('../../../core/helpers/validator.php');
+require_once('../../../core/models/clientes.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../core/libraries/PHPMailer/src/Exception.php';
-require '../../core/libraries/PHPMailer/src/PHPMailer.php';
-require '../../core/libraries/PHPMailer/src/SMTP.php';
-$mail = new PHPMailer();
-$mail->CharSet = "UTF-8";
+// require '../../core/libraries/PHPMailer/src/Exception.php';
+// require '../../core/libraries/PHPMailer/src/PHPMailer.php';
+// require '../../core/libraries/PHPMailer/src/SMTP.php';
+// $mail = new PHPMailer();
+// $mail->CharSet = "UTF-8";
 //Se comprueba si existe una petición del sitio web y la acción a realizar, de lo contrario se muestra una página de error
 if (isset($_GET['site']) && isset($_GET['action'])) {
 	session_start();
@@ -297,22 +297,26 @@ if (isset($_GET['site']) && isset($_GET['action'])) {
                     if ($cliente->setApellidos($_POST['apellidos'])) {
                         if ($cliente->setCorreo($_POST['correo'])) {
                             if ($cliente->setUsuario($_POST['alias'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($cliente->setClave($_POST['clave1'])) {
-                                        if(!$captcha){
-                                            $result['exception'] = 'Verifica el captcha';
-                                        } else {
-                                            if ($cliente->createClientes()) {
-                                                $result['status'] = 1;
+                                if($cliente->setDireccion($_POST['direccion'])){
+                                    if ($_POST['clave1'] == $_POST['clave2']) {
+                                        if ($cliente->setClave($_POST['clave1'])) {
+                                            if(!$captcha){
+                                                $result['exception'] = 'Verifica el captcha';
                                             } else {
-                                                $result['exception'] = 'Operación fallida';
-                                            }  
+                                                if ($cliente->createClientes()) {
+                                                    $result['status'] = 1;
+                                                } else {
+                                                    $result['exception'] = 'Operación fallida';
+                                                }  
+                                            }
+                                        } else {
+                                            $result['exception'] = 'Clave menor a 6 caracteres';
                                         }
                                     } else {
-                                        $result['exception'] = 'Clave menor a 6 caracteres';
+                                        $result['exception'] = 'Claves diferentes';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'direccion incorrecta';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';

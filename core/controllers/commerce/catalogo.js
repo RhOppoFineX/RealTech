@@ -150,8 +150,8 @@ function getProducto(id)
                                             <input id="cantidad" type="number" name="cantidad" min="1" class="validate">
                                             <label for="cantidad">Cantidad</label>
                                         </div>
-                                        <div class="input-field col s12 m6">
-                                            <button type="submit" class="btn waves-effect waves-light blue tooltipped" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></button>
+                                        <div class="input-field col s12 m6">                                       
+                                            <a href="#" onclick="agregarCarrito(${result.dataset.id_producto})" class="btn waves-effect waves-light blue tooltipped" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></a>
                                         </div>
                                     </div>
                                 </form>
